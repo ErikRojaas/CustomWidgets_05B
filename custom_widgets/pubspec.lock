@@ -62,14 +62,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_cupertino_desktop_kit:
-    dependency: "direct main"
-    description:
-      name: flutter_cupertino_desktop_kit
-      sha256: ebac1175e7e69ed166db79a7fea6509e64c9c02740c2046ae3a265c10ea0161c
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.10"
   flutter_lints:
     dependency: "direct dev"
     description:
