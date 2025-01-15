@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter/material.dart';
 
 class LayoutButtons extends StatefulWidget {
   const LayoutButtons({super.key});
@@ -67,25 +68,24 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CDKButton(
-              style: CDKButtonStyle.action,
-              isLarge: true,
+            child: WindowsXPButton(
               onPressed: () {},
-              child: const Text('Action large'),
+              child: const Text('_ '),
+              buttonType: ButtonType.action,
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CDKButton(
-              style: CDKButtonStyle.action,
+            child: WindowsXPButton(
               onPressed: () {},
-              child: const Text('Action'),
+              child: const Text('▭'),
+              buttonType: ButtonType.action,
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CDKButton(
-              style: CDKButtonStyle.destructive,
+            child: WindowsXPButton(
               onPressed: () {},
-              child: const Text('Destructive'),
+              child: const Text('X'),
+              buttonType: ButtonType.destructive,
             )),
         Padding(
             padding: const EdgeInsets.all(8),
@@ -283,3 +283,104 @@ class _LayoutButtonsState extends State<LayoutButtons> {
     ]);
   }
 }
+
+class WindowsXPButton extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onPressed;
+  final bool isLarge;
+  final ButtonType buttonType; // Nuevo parámetro para tipo de botón
+
+  const WindowsXPButton({
+    required this.child,
+    required this.onPressed,
+    this.isLarge = false,
+    required this.buttonType, // Recibe el tipo de botón
+  });
+
+  @override
+  _WindowsXPButtonState createState() => _WindowsXPButtonState();
+}
+
+enum ButtonType { action, destructive }
+
+class _WindowsXPButtonState extends State<WindowsXPButton> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: GestureDetector(
+        onTapDown: (_) => setState(() => _isPressed = true),
+        onTapUp: (_) {
+          setState(() => _isPressed = false);
+          widget.onPressed();  // Llama al callback cuando se presiona el botón
+        },
+        onTapCancel: () => setState(() => _isPressed = false),
+        child: CustomPaint(
+          painter: WindowsXPButtonPainter(
+            isLarge: widget.isLarge,
+            isPressed: _isPressed,
+            buttonType: widget.buttonType, // Pasa el tipo de botón al pintor
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+            child: DefaultTextStyle(
+              style: TextStyle(
+                fontFamily: 'MS_Sans_Serif', // Fuente de Windows XP
+                color: Colors.white,
+                fontSize: widget.isLarge ? 30 : 28, // Tamaño más grande para botones grandes
+                fontWeight: FontWeight.bold, // Texto en negrita
+              ),
+              child: widget.child,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class WindowsXPButtonPainter extends CustomPainter {
+  final bool isLarge;
+  final bool isPressed;
+  final ButtonType buttonType; // Recibe el tipo de botón
+
+  WindowsXPButtonPainter({
+    required this.isLarge,
+    required this.isPressed,
+    required this.buttonType, // Recibe el tipo de botón
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = _getButtonColor() // Determina el color según el tipo y el estado
+      ..style = PaintingStyle.fill;
+
+    // Dibuja el fondo del botón sin sombra
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(6.0));
+    canvas.drawRRect(rrect, paint);
+  }
+
+  // Método que determina el color del botón según el tipo y si está presionado
+  Color _getButtonColor() {
+    if (buttonType == ButtonType.action) {
+      return isPressed
+          ? Color(0xFF214A7D) // Azul más oscuro cuando se presiona
+          : Color(0xFF3166AB); // Azul por defecto
+    } else if (buttonType == ButtonType.destructive) {
+      return isPressed
+          ? Color(0xFF9A4028) // Rojo más oscuro cuando se presiona
+          : Color(0xFFE25D43); // Rojo por defecto
+    }
+    return Color(0xFF3166AB); // Azul por defecto en caso de error
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+
+// SIGUIENTES: CERRAR SESION (AMARILLO), APAGAR (ROJO), REINICIAR (VERDE), START (VERDE CON LOGO WINDOWS)
