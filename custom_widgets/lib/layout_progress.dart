@@ -8,7 +8,7 @@ class LayoutProgress extends StatefulWidget {
   State<LayoutProgress> createState() => _LayoutProgressState();
 }
 
-class _LayoutProgressState extends State<LayoutProgress> with SingleTickerProviderStateMixin {
+class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStateMixin {
   // Variables para la barra de progreso estática
   double _progressL = 0.0;
   // Variables para la barra de progreso indeterminada animada
@@ -16,9 +16,13 @@ class _LayoutProgressState extends State<LayoutProgress> with SingleTickerProvid
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  // Variables para el círculo de progreso
+  // Variables para el círculo de progreso estático
   double _progressC = 0.0;
   bool _isRunningC = false;
+
+  // Variables para el círculo de progreso indeterminado
+  late AnimationController _circularController;
+  late Animation<double> _circularAnimation;
 
   // Método para incrementar la barra de progreso estática
   void _increaseProgressL() {
@@ -46,9 +50,9 @@ class _LayoutProgressState extends State<LayoutProgress> with SingleTickerProvid
   void _toggleIndeterminateC() {
     setState(() {
       if (_isRunningC) {
-        _controller.stop();
+        _circularController.stop();
       } else {
-        _controller.repeat();
+        _circularController.repeat();
       }
       _isRunningC = !_isRunningC;
     });
@@ -63,15 +67,24 @@ class _LayoutProgressState extends State<LayoutProgress> with SingleTickerProvid
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _controller, curve: Curves.linear),
+    );
+
+    // Configuración del controlador para el círculo indeterminado
+    _circularController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+    _circularAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _circularController, curve: Curves.linear),
     );
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _circularController.dispose();
     super.dispose();
   }
 
@@ -166,7 +179,7 @@ class _LayoutProgressState extends State<LayoutProgress> with SingleTickerProvid
                   painter: CircularProgressPainter(
                     progress: _progressC,
                     isIndeterminate: _isRunningC,
-                    animation: _animation,
+                    animation: _circularAnimation,
                   ),
                 ),
               ),
@@ -189,6 +202,44 @@ class _LayoutProgressState extends State<LayoutProgress> with SingleTickerProvid
                   });
                 },
                 child: const Text('Increase'),
+              ),
+            ),
+          ]
+      ),
+
+      const SizedBox(height: 50),
+
+      // Círculo de progreso indeterminado
+      const Padding(padding: EdgeInsets.all(8), child: Text('Indeterminate Circular Progress Bar:')),
+      Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: AnimatedBuilder(
+                  animation: _circularAnimation,
+                  builder: (context, child) {
+                    return CustomPaint(
+                      painter: CircularProgressPainter(
+                        progress: 0.0, // Siempre en 0 para ser indeterminado
+                        isIndeterminate: true,
+                        animation: _circularAnimation,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: CDKButton(
+                style: CDKButtonStyle.normal,
+                onPressed: _toggleIndeterminateC,
+                child: Text(_isRunningC ? 'Stop' : 'Start'),
               ),
             ),
           ]
@@ -295,7 +346,7 @@ class CircularProgressPainter extends CustomPainter {
       ..strokeWidth = 6; // Grosor del círculo de fondo
 
     Paint paintForeground = Paint()
-      ..color = const Color.fromARGB(255, 95, 205, 224) // Color del progreso
+      ..color = const Color.fromARGB(255, 76, 166, 182) // Color del progreso
       ..style = PaintingStyle.stroke
       ..strokeWidth = 6; // Grosor del progreso
 
