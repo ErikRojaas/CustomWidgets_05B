@@ -21,6 +21,16 @@ class _LayoutPickersState extends State<LayoutPickers> {
   double _valueSliderGradient = 0.75;
 
   @override
+  void initState() {
+    super.initState();
+    // Inicializamos los colores del gradiente con un valor predeterminado
+    _valueSliderColors = [
+      Color.lerp(CupertinoColors.systemBlue, CupertinoColors.systemGreen, _valueSliderGradient)!,
+      Color.lerp(CupertinoColors.systemYellow, CupertinoColors.systemRed, _valueSliderGradient)!,
+    ];
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
@@ -73,6 +83,38 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ),
               ),
               Text(_valueSlider.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          const Padding(
+            padding: EdgeInsets.all(8),
+            child: Text('XP Styled Gradient Picker:', style: TextStyle(fontSize: 16)),
+          ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: _xpStyledGradientPicker(
+                  value: _valueSliderGradient,
+                  onChanged: (value) {
+                    setState(() {
+                      _valueSliderGradient = value;
+                      _valueSliderColors = [
+                        Color.lerp(CupertinoColors.systemBlue, CupertinoColors.systemGreen, _valueSliderGradient)!,
+                        Color.lerp(CupertinoColors.systemYellow, CupertinoColors.systemRed, _valueSliderGradient)!,
+                      ];
+                    });
+                  },
+                ),
+              ),
+              // Cuadrado que muestra el color actual del gradiente
+              Container(
+                width: 40,
+                height: 40,
+                color: _valueSliderColors[0], // Primer color del gradiente
+              ),
+              Text(_valueSliderGradient.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
             ],
           ),
           const SizedBox(height: 8),
@@ -198,6 +240,40 @@ class _LayoutPickersState extends State<LayoutPickers> {
     );
   }
 
+  Widget _xpStyledGradientPicker({required double value, required ValueChanged<double> onChanged}) {
+  return GestureDetector(
+    onPanUpdate: (details) {
+      // Calculamos el nuevo valor basado en la posición horizontal y lo "clamp" entre 0 y 1
+      double newValue = (details.localPosition.dx / 200).clamp(0.0, 1.0);
+      onChanged(newValue);
+    },
+    onTapDown: (details) {
+      // Calculamos el valor del gradiente al hacer clic
+      double newValue = (details.localPosition.dx / 200).clamp(0.0, 1.0);
+      onChanged(newValue);
+    },
+    child: Container(
+      width: 200,
+      height: 50,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            CupertinoColors.systemBlue, // Azul
+            CupertinoColors.systemGreen, // Verde
+          ],
+          stops: [0.0, 1.0],  // Gradiente completo desde 0 (azul) hasta 1 (verde)
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: CupertinoColors.systemGrey),
+      ),
+    ),
+  );
+}
+
+
+
   Widget _xpStyledSegmentedButtons({required int selectedIndex, required List<Widget> options, required ValueChanged<int> onSelected}) {
     return CupertinoSegmentedControl<int>(
       groupValue: selectedIndex,
@@ -233,6 +309,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             decoration: BoxDecoration(
               color: selectedStates[index] ? CupertinoColors.activeBlue.withOpacity(0.3) : CupertinoColors.white,
               border: Border.all(color: CupertinoColors.systemGrey),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: options[index],
           ),
