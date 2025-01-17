@@ -23,7 +23,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
   @override
   void initState() {
     super.initState();
-    // Inicializamos los colores del gradiente con un valor predeterminado
     _valueSliderColors = [
       Color.lerp(CupertinoColors.systemBlue, CupertinoColors.systemGreen, _valueSliderGradient)!,
       Color.lerp(CupertinoColors.systemYellow, CupertinoColors.systemRed, _valueSliderGradient)!,
@@ -108,7 +107,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   },
                 ),
               ),
-              // Cuadrado que muestra el color actual del gradiente
               Container(
                 width: 40,
                 height: 40,
@@ -220,7 +218,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
         decoration: BoxDecoration(
           color: CupertinoColors.white,
           border: Border.all(color: CupertinoColors.systemGrey),
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.zero, // Eliminamos las esquinas redondeadas
         ),
         child: Center(
           child: Text('${(value * 360).round()}°', style: const TextStyle(fontSize: 12)),
@@ -241,38 +239,34 @@ class _LayoutPickersState extends State<LayoutPickers> {
   }
 
   Widget _xpStyledGradientPicker({required double value, required ValueChanged<double> onChanged}) {
-  return GestureDetector(
-    onPanUpdate: (details) {
-      // Calculamos el nuevo valor basado en la posición horizontal y lo "clamp" entre 0 y 1
-      double newValue = (details.localPosition.dx / 200).clamp(0.0, 1.0);
-      onChanged(newValue);
-    },
-    onTapDown: (details) {
-      // Calculamos el valor del gradiente al hacer clic
-      double newValue = (details.localPosition.dx / 200).clamp(0.0, 1.0);
-      onChanged(newValue);
-    },
-    child: Container(
-      width: 200,
-      height: 50,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            CupertinoColors.systemBlue, // Azul
-            CupertinoColors.systemGreen, // Verde
-          ],
-          stops: [0.0, 1.0],  // Gradiente completo desde 0 (azul) hasta 1 (verde)
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
+    return GestureDetector(
+      onPanUpdate: (details) {
+        double newValue = (details.localPosition.dx / 200).clamp(0.0, 1.0);
+        onChanged(newValue);
+      },
+      onTapDown: (details) {
+        double newValue = (details.localPosition.dx / 200).clamp(0.0, 1.0);
+        onChanged(newValue);
+      },
+      child: Container(
+        width: 200,
+        height: 50,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              CupertinoColors.systemBlue,
+              CupertinoColors.systemGreen,
+            ],
+            stops: [0.0, 1.0],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: BorderRadius.zero, // Eliminamos las esquinas redondeadas
+          border: Border.all(color: CupertinoColors.systemGrey),
         ),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: CupertinoColors.systemGrey),
       ),
-    ),
-  );
-}
-
-
+    );
+  }
 
   Widget _xpStyledSegmentedButtons({required int selectedIndex, required List<Widget> options, required ValueChanged<int> onSelected}) {
     return CupertinoSegmentedControl<int>(
@@ -309,7 +303,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             decoration: BoxDecoration(
               color: selectedStates[index] ? CupertinoColors.activeBlue.withOpacity(0.3) : CupertinoColors.white,
               border: Border.all(color: CupertinoColors.systemGrey),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.zero, // Eliminamos las esquinas redondeadas
             ),
             child: options[index],
           ),
