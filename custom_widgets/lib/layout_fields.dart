@@ -136,8 +136,8 @@ class _LayoutFieldsState extends State<LayoutFields> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-                width: 150,
-                child: CDKFieldNumericSlider(
+                width: 200,
+                child: CDKFieldNumericSliderWindowsXP(
                   value: _valueNumericSlider0,
                   onValueChanged: (double value) {
                     setState(() {
@@ -148,8 +148,8 @@ class _LayoutFieldsState extends State<LayoutFields> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-                width: 150,
-                child: CDKFieldNumericSlider(
+                width: 200,
+                child: CDKFieldNumericSliderWindowsXP(
                   value: _valueNumericSlider1,
                   min: 0,
                   max: 100,
@@ -165,8 +165,8 @@ class _LayoutFieldsState extends State<LayoutFields> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-                width: 150,
-                child: CDKFieldNumericSlider(
+                width: 200,
+                child: CDKFieldNumericSliderWindowsXP(
                   value: _valueNumericSlider2,
                   min: 0,
                   max: 255,
@@ -650,5 +650,224 @@ class _ArrowButtonPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;  // No es necesario repintar en este caso
+  }
+}
+
+
+class CDKFieldNumericSliderWindowsXP extends StatefulWidget {
+  final double value;
+  final double textSize;
+  final double min;
+  final double max;
+  final double increment;
+  final int decimals;
+  final bool enabled;
+  final String units;
+  final Function(double)? onValueChanged;
+  final Function(double)? onTextChanged;
+  const CDKFieldNumericSliderWindowsXP({
+    Key? key,
+    this.value = 0.0,
+    this.textSize = 20,
+    this.min = 0,
+    this.max = 1,
+    this.increment = double.infinity, // If infinity, buttons are hidden
+    this.decimals = 1, // Valor per defecte, sense decimals si no s'especifica
+    this.units = "",
+    this.enabled = true,
+    this.onValueChanged,
+    this.onTextChanged,
+  }) : super(key: key);
+
+  @override
+  CDKFieldNumericSliderWindowsXPState createState() => CDKFieldNumericSliderWindowsXPState();
+}
+
+class CDKFieldNumericSliderWindowsXPState extends State<CDKFieldNumericSliderWindowsXP> {
+  double _previousValue = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _previousValue = widget.value;
+  }
+
+  void _onValueChanged(String origin, double newValue) {
+    bool valueChanged = false;
+    double distance = (widget.max - widget.min).abs();
+
+    if (origin == "picker") {
+      newValue = newValue * distance + widget.min;
+    }
+
+    if (newValue < widget.min) {
+      newValue = widget.min;
+      valueChanged = true;
+    } else if (newValue > widget.max) {
+      newValue = widget.max;
+      valueChanged = true;
+    }
+
+    if (valueChanged || newValue != _previousValue) {
+      widget.onValueChanged?.call(newValue);
+      _previousValue = newValue;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double distance = (widget.max - widget.min).abs();
+    double sliderValue = ((widget.value - widget.min) / distance).clamp(0, 1);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+            child: CDKPickerSliderWindowsXP(
+          value: sliderValue,
+          size: widget.textSize + 8,
+          enabled: widget.enabled,
+          onChanged: (value) {
+            _onValueChanged("picker", value);
+          },
+        )),
+        const SizedBox(width: 4),
+        SizedBox(
+          width: 80,
+          child: CDKFieldNumericWithArrows(
+            value: widget.value,
+            textSize: widget.textSize,
+            min: widget.min,
+            max: widget.max,
+            increment: widget.increment,
+            decimals: widget.decimals,
+            enabled: widget.enabled,
+            units: widget.units,
+            onValueChanged: (value) {
+              _onValueChanged("numeric", value);
+            },
+            onTextChanged: (value) {
+              widget.onTextChanged?.call(value);
+            },
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+class CDKPickerSliderWindowsXP extends StatefulWidget {
+  final double value;
+  final double size;
+  final bool enabled;
+  final Function(double)? onChanged;
+
+  const CDKPickerSliderWindowsXP({
+    Key? key,
+    required this.value,
+    this.enabled = true,
+    this.size = 40,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  CDKPickerSliderWindowsXPState createState() => CDKPickerSliderWindowsXPState();
+}
+
+class CDKPickerSliderWindowsXPState extends State<CDKPickerSliderWindowsXP> {
+  void _getValue(Offset globalPosition) {
+    RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final position = renderBox.globalToLocal(globalPosition);
+
+    double newValue = (position.dx / renderBox.size.width).clamp(0.0, 1.0);
+
+    widget.onChanged?.call(newValue);
+  }
+
+  void _onTapDown(TapDownDetails details) {
+    _getValue(details.globalPosition);
+  }
+
+  void _onPanUpdate(DragUpdateDetails details) {
+    if (!widget.enabled) return;
+    _getValue(details.globalPosition);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (details) => _onTapDown(details),
+      onPanUpdate: (details) => _onPanUpdate(details),
+      child: CustomPaint(
+        painter: CDKPickerSliderWindowsXPPainter(value: widget.value),
+        size: Size(widget.size, widget.size),
+      ),
+    );
+  }
+}
+
+// CustomPainter para dibujar la figura
+class CDKPickerSliderWindowsXPPainter extends CustomPainter {
+  final double value;
+
+  CDKPickerSliderWindowsXPPainter({required this.value});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint greenPaint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.fill;
+
+    Paint backgroundPaint = Paint()
+      ..color = Colors.grey.shade200
+      ..style = PaintingStyle.fill;
+
+    Paint trianglePaint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.fill;
+
+    double width = size.width;
+    double height = size.height;
+
+    // Dibuja la barra gris
+    double barHeight = 3.0;
+    double barY = height / 2 - barHeight / 2;
+    Rect barRect = Rect.fromLTWH(0, barY, width, barHeight);
+    backgroundPaint.color = const Color.fromARGB(255, 58, 57, 57);
+    canvas.drawRect(barRect, backgroundPaint);
+
+    // Dibuja el cuadrado con la parte superior verde
+    double squareSize = 20.0;
+    double squareTopY = barY - squareSize / 2;
+    double squareX = width * value - squareSize / 2;
+
+    // Dibuja el cuadrado con la parte superior verde
+    Rect squareRect = Rect.fromLTWH(squareX, squareTopY, squareSize, squareSize);
+    backgroundPaint.color = const Color.fromARGB(255, 196, 192, 192);
+    canvas.drawRect(squareRect, backgroundPaint);
+
+    // Dibuja la parte superior del cuadrado (verde)
+    Path topBorder = Path();
+    topBorder.moveTo(squareX, squareTopY);
+    topBorder.lineTo(squareX + squareSize, squareTopY);
+    topBorder.lineTo(squareX + squareSize, squareTopY + 6); // altura del borde verde
+    topBorder.lineTo(squareX, squareTopY + 6);
+    topBorder.close();
+    greenPaint.color = Colors.green;
+    canvas.drawPath(topBorder, greenPaint);
+
+    // Dibuja el pico en la parte inferior con la misma anchura que el cuadrado
+    Path trianglePath = Path();
+    trianglePath.moveTo(squareX, squareTopY + squareSize); // Inicio en la parte inferior izquierda del cuadrado
+    trianglePath.lineTo(squareX + squareSize / 2, squareTopY + squareSize + 10); // Punta hacia abajo
+    trianglePath.lineTo(squareX + squareSize, squareTopY + squareSize); // Fin en la parte inferior derecha
+    trianglePath.close();
+    trianglePaint.color = Colors.green;
+    canvas.drawPath(trianglePath, trianglePaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
