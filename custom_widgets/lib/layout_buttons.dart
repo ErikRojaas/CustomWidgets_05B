@@ -12,10 +12,8 @@ class LayoutButtons extends StatefulWidget {
 class _LayoutButtonsState extends State<LayoutButtons> {
   bool _isSwitched = false;
   int _selectedRadio = 1;
-  int _indexButtonSelect0 = 1;
   int _indexButtonSelect1 = 1;
   late Widget _preloadedColorPicker;
-  final GlobalKey<CDKDialogPopoverState> _anchorColorButton = GlobalKey();
   final ValueNotifier<Color> _valueColorNotifier =
       ValueNotifier(const Color(0x800080FF));
 

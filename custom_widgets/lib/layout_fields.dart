@@ -17,7 +17,6 @@ class _LayoutFieldsState extends State<LayoutFields> {
   late TextEditingController _passController;
   double _valueNumeric = 5.5;
   double _valueNumericIncrement = -1.0;
-  double _valueNumeric360 = 270;
   double _valueNumericSlider0 = 0.5;
   double _valueNumericSlider1 = 50;
   double _valueNumericSlider2 = 128;
