@@ -22,7 +22,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
-              'This project, Flutter Cupertino Desktop Kit (CDK), defines Flutter widgets for Desktop, providing a macOS style aesthetic, built upon the foundation of Cupertino widgets.')),
+              'This project, Flutter Cupertino Desktop Kit (CDK), defines Flutter widgets for Desktop, providing a WindowsXP style aesthetic, built upon the foundation of Cupertino widgets.')),
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
@@ -67,7 +67,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
-              'The CDK prefix strives to be distinctive within the Flutter ecosystem, while remaining concise and suggestive of Flutter Desktop and macOS AppKit. In doing so, it captures the essence of the project.')),
+              'The CDK prefix strives to be distinctive within the Flutter ecosystem, while remaining concise and suggestive of Flutter Desktop and WindowsXP AppKit. In doing so, it captures the essence of the project.')),
       const SizedBox(height: 50),
     ]);
   }
