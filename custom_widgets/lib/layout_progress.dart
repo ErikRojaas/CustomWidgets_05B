@@ -91,7 +91,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
-      const SizedBox(height: 8),
+      const SizedBox(height: 7),
     
       // Barra de progreso estática
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar:')),
