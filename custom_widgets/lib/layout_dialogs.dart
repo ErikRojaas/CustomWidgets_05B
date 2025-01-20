@@ -491,7 +491,10 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                             ),
                             const SizedBox(height: 8),
                             Text(value.toStringAsFixed(2),
-                                style: const TextStyle(fontSize: 12)),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'MS_Sans_Serif',
+                                ),),
                             SizedBox(
                               height: 20,
                               width: 200,
@@ -504,9 +507,15 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                             ),
                             const SizedBox(height: 8),
                             const Text('Using a value notifier to',
-                                style: TextStyle(fontSize: 12)),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'MS_Sans_Serif',
+                                ),),
                             const Text('communicate with the dialog.',
-                                style: TextStyle(fontSize: 12)),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'MS_Sans_Serif',
+                                ),),
                           ],
                         ),
                       ),
@@ -526,7 +535,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return ListView(children: [
-      const SizedBox(height: 8),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKPopOver:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -549,7 +558,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('With animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKDialogModal:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKDialogModal:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -569,7 +578,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKDialogDraggable:')),
+          padding: EdgeInsets.all(8), child: Text('CDKDialogDraggable:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -590,7 +599,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('With animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKDialogArrow:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKDialogArrow:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -628,7 +637,10 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
           valueListenable: _sliderValueNotifier,
           builder: (context, value, child) {
             return Text('Slider value: ${value.toStringAsFixed(2)}',
-                style: const TextStyle(fontSize: 12));
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'MS_Sans_Serif',
+                ),);
           },
         )
       ]),

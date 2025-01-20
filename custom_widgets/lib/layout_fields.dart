@@ -32,7 +32,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKFieldText:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKFieldText:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -88,7 +88,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKFieldNumeric:')),
+          padding: EdgeInsets.all(8), child: Text('CDKFieldNumeric:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -130,7 +130,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKFieldNumericSlider:')),
+          padding: EdgeInsets.all(8), child: Text('CDKFieldNumericSlider:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'))),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),

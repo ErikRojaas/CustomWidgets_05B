@@ -62,7 +62,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
     _preloadedColorPicker = _buildPreloadedColorPicker();
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButton:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButton:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),),),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -131,7 +131,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             buttonType: ButtonType.restart,
           )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonHelp:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonHelp:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),)),
       Wrap(children: [
         Padding(
           padding: const EdgeInsets.all(8),
@@ -142,7 +142,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
           ),
         ),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonIcon:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonIcon:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),)),
       Wrap(children: [
         Padding(
           padding: const EdgeInsets.all(8),
@@ -162,7 +162,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         ),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKButtonSwitch:')),
+          padding: EdgeInsets.all(8), child: Text('CDKButtonSwitch:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),)),
       Wrap(children: [
         Padding(
           padding: const EdgeInsets.all(8),
@@ -172,14 +172,14 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                 _isSwitched = !_isSwitched;
               });
             },
-            child: Text(_isSwitched ? 'ON' : 'OFF'),
+            child: Text(_isSwitched ? 'ON' : 'OFF', style: TextStyle(fontFamily: 'MS_Sans_Serif'),),
             buttonType: _isSwitched ? ButtonType.restart : ButtonType.destructive,
           ),
         ),
       ]),
       const Padding(
         padding: EdgeInsets.all(8),
-        child: Text('CDKButtonRadio:'),
+        child: Text('CDKButtonRadio:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),),
       ),
       Wrap(
         direction: Axis.vertical, // Apilar los botones en una columna
@@ -204,7 +204,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               const SizedBox(width: 8), // Espaciado entre el botón y el texto
               const Text(
                 "Microsoft Office 2007",
-                style: TextStyle(color: Colors.black), // Texto negro
+                style: TextStyle(color: Colors.black, fontFamily: 'MS_Sans_Serif'),  // Texto negro
               ),
             ],
           ),
@@ -227,7 +227,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               const SizedBox(width: 8), // Espaciado entre el botón y el texto
               const Text(
                 "Microsoft Office 2003",
-                style: TextStyle(color: Colors.black), // Texto negro
+                style: TextStyle(color: Colors.black, fontFamily: 'MS_Sans_Serif'), // Texto negro
               ),
             ],
           ),
@@ -250,14 +250,14 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               const SizedBox(width: 8), // Espaciado entre el botón y el texto
               const Text(
                 "Open Office",
-                style: TextStyle(color: Colors.black), // Texto negro
+                style: TextStyle(color: Colors.black, fontFamily: 'MS_Sans_Serif'), // Texto negro
               ),
             ],
           ),
         ],
       ),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKButtonSelect:')),
+          padding: EdgeInsets.all(8), child: Text('CDKButtonSelect:', style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),)),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -409,7 +409,7 @@ class WindowsXPButtonPainter extends CustomPainter {
       case ButtonType.radio:
         return isSelected ? Color.fromARGB(255, 19, 157, 221): Color.fromARGB(255, 233, 223, 223); // Gris cuando no está seleccionado
       case ButtonType.help:
-        return Color(0xFF3166AB); // Color para el botón de ayuda
+        return isPressed ? Color(0xFF214A7D) : Color(0xFF3166AB); // Color para el botón de ayuda
     }
   }
 

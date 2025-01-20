@@ -70,7 +70,7 @@ class LayoutState extends State<Layout> {
                     onPressed: () {
                       toggleLeftSidebar();
                     }),
-                Text(_section),
+                Text(_section, style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),),
                 CDKButtonIcon(
                   icon: CupertinoIcons.sidebar_right,
                   onPressed: () {

@@ -1,3 +1,4 @@
+import 'package:custom_widgets/layout_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                   width: 100,
-                  child: _xpStyledSlider(
+                  child: CDKPickerSliderWindowsXP(
                     value: _valueSlider,
                     onChanged: (value) {
                       setState(() {

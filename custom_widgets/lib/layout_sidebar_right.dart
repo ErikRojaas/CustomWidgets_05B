@@ -16,6 +16,6 @@ class LayoutButtonsState extends State<LayoutSidebarRight> {
         theme.isLight ? const Color(0xFFFAFAFA) : const Color(0xFF555555);
     return Container(
         color: backgroundColor,
-        child: ListView(children: const [Text("Sidebar right")]));
+        child: ListView(children: const [Text("Sidebar right", style: TextStyle(fontSize: 30, fontFamily: 'MS_Sans_Serif'),)]));
   }
 }
