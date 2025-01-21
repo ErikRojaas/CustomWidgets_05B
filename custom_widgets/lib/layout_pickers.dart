@@ -34,14 +34,14 @@ class _LayoutPickersState extends State<LayoutPickers> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('XP Styled Pickers'),
+        middle: Text('XP Styled Pickers', style: TextStyle(fontSize: 30, fontFamily: "MS_Sans_Serif"),),
       ),
       child: ListView(
         children: [
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.all(8),
-            child: Text('XP Styled 360 Picker:', style: TextStyle(fontSize: 16)),
+            child: Text('XP Styled 360 Picker:', style: TextStyle(fontSize: 30, fontFamily: "MS_Sans_Serif")),
           ),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -57,13 +57,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   },
                 ),
               ),
-              Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
+              Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
             ],
           ),
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.all(8),
-            child: Text('XP Styled Slider:', style: TextStyle(fontSize: 16)),
+            child: Text('XP Styled Slider:', style: TextStyle(fontSize: 30, fontFamily: "MS_Sans_Serif")),
           ),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -82,13 +82,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   ),
                 ),
               ),
-              Text(_valueSlider.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
+              Text(_valueSlider.toStringAsFixed(2), style: const TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
             ],
           ),
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.all(8),
-            child: Text('XP Styled Gradient Picker:', style: TextStyle(fontSize: 16)),
+            child: Text('XP Styled Gradient Picker:', style: TextStyle(fontSize: 30, fontFamily: "MS_Sans_Serif")),
           ),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -113,13 +113,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 height: 40,
                 color: _valueSliderColors[0], // Primer color del gradiente
               ),
-              Text(_valueSliderGradient.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
+              Text(_valueSliderGradient.toStringAsFixed(2), style: const TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
             ],
           ),
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.all(8),
-            child: Text('XP Styled Segmented Buttons:', style: TextStyle(fontSize: 16)),
+            child: Text('XP Styled Segmented Buttons:', style: TextStyle(fontSize: 30, fontFamily: "MS_Sans_Serif")),
           ),
           Wrap(
             children: [
@@ -128,8 +128,8 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 child: _xpStyledSegmentedButtons(
                   selectedIndex: _selectedIndexButtonsSegmented0,
                   options: const [
-                    Text('Car'),
-                    Text('Motorbike'),
+                    Text('Car', style: TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
+                    Text('Motorbike', style: TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
                     Icon(CupertinoIcons.airplane),
                   ],
                   onSelected: (int index) {
@@ -145,9 +145,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   selectedIndex: _selectedIndexButtonsSegmented1,
                   options: const [
                     Icon(CupertinoIcons.ant),
-                    Text('Flower'),
-                    Text('Grass'),
-                    Text('Bush'),
+                    Text('Flower', style: TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
+                    Text('Grass', style: TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
+                    Text('Bush', style: TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
                   ],
                   onSelected: (int index) {
                     setState(() {
@@ -161,7 +161,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.all(8),
-            child: Text('XP Styled Buttons Bar:', style: TextStyle(fontSize: 16)),
+            child: Text('XP Styled Buttons Bar:', style: TextStyle(fontSize: 30, fontFamily: "MS_Sans_Serif")),
           ),
           Wrap(
             children: [
@@ -173,7 +173,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                     Icon(CupertinoIcons.text_alignleft),
                     Icon(CupertinoIcons.text_aligncenter),
                     Icon(CupertinoIcons.text_alignright),
-                    Text("Justify"),
+                    Icon(CupertinoIcons.text_justify),
                   ],
                   onChanged: (List<bool> options) {
                     setState(() {

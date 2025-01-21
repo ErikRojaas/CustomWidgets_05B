@@ -132,21 +132,20 @@ class CDKButtonSidebarWindowsXP extends StatelessWidget {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Color colorText = theme.getSidebarColorText(isSelected, isAccent);
-
-    Color colorBackground =
-        theme.getSidebarColorBackground(isSelected, isAccent);
+    Color colorBackground = theme.getSidebarColorBackground(isSelected, isAccent);
 
     return GestureDetector(
       onTap: onSelected,
       child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        child: CustomPaint(
+          painter: _ButtonBorderPainter(colorBackground),
           child: Container(
             width: double.infinity,
             padding: child is Text
                 ? const EdgeInsets.fromLTRB(8, 6, 8, 8)
                 : const EdgeInsets.fromLTRB(8, 6, 8, 6),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
               color: colorBackground,
             ),
             child: child is Text
@@ -160,10 +159,43 @@ class CDKButtonSidebarWindowsXP extends StatelessWidget {
                         TextStyle(fontSize: 20, color: colorText),
                   )
                 : child,
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
+
+class _ButtonBorderPainter extends CustomPainter {
+  final Color backgroundColor;
+
+  _ButtonBorderPainter(this.backgroundColor);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final darkerColor = _darkenColor(backgroundColor, 0.2);
+    final paint = Paint()
+      ..color = darkerColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 5.0;
+
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    canvas.drawRect(rect, paint);
+  }
+
+  Color _darkenColor(Color color, double amount) {
+    assert(amount >= 0 && amount <= 1);
+    final hsl = HSLColor.fromColor(color);
+    final darkerHsl = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+    return darkerHsl.toColor();
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
 
 
 class CDKButtonRadioWindowsXP extends StatelessWidget {

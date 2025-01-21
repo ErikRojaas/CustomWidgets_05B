@@ -1,3 +1,4 @@
+import 'package:custom_widgets/layout_dialogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 
@@ -118,8 +119,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: CDKButton(
-                style: CDKButtonStyle.normal,
+              child: CDKButtonWindowsXP(
                 onPressed: _increaseProgressL,
                 child: const Text('Increase', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 18)),
               ),
@@ -153,8 +153,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: CDKButton(
-                style: CDKButtonStyle.normal,
+              child: CDKButtonWindowsXP(
                 onPressed: _toggleIndeterminateL,
                 child: Text(
                   _isRunningL ? 'Stop' : 'Start',
@@ -196,8 +195,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: CDKButton(
-                style: CDKButtonStyle.normal,
+              child: CDKButtonWindowsXP(
                 onPressed: () {
                   setState(() {
                     _progressC = (_progressC + 0.1);
@@ -241,8 +239,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: CDKButton(
-                style: CDKButtonStyle.normal,
+              child: CDKButtonWindowsXP(
                 onPressed: _toggleIndeterminateC,
                 child: Text(
                   _isRunningC ? 'Stop' : 'Start',
