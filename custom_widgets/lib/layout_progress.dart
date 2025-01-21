@@ -91,7 +91,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
-      const SizedBox(height: 7),
+      const SizedBox(height: 4),
     
       // Barra de progreso estática
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar:', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
@@ -103,7 +103,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
               padding: const EdgeInsets.all(8),
               child: SizedBox(
                 width: 250,
-                height: 30,
+                height: 27,
                 child: CustomPaint(
                   painter: WindowsXPBarPainter(_progressL),
                 ),
@@ -127,7 +127,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
           ]
       ),
     
-      const SizedBox(height: 50),
+      const SizedBox(height: 35),
 
 
       // Barra de progreso indeterminada animada
@@ -165,7 +165,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
           ]
       ),
 
-      const SizedBox(height: 50),
+      const SizedBox(height: 35),
 
       // Círculo de progreso estático
       const Padding(padding: EdgeInsets.all(8), child: Text('Circular Progress Bar:', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
@@ -212,7 +212,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
           ]
       ),
 
-      const SizedBox(height: 50),
+      const SizedBox(height: 35),
 
       // Círculo de progreso indeterminado
       const Padding(padding: EdgeInsets.all(8), child: Text('Indeterminate Circular Progress Bar:', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
@@ -253,7 +253,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
           ]
       ),
 
-      const SizedBox(height: 50),
+      const SizedBox(height: 35),
     ]);
   }
 }
