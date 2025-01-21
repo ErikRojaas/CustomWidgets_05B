@@ -94,7 +94,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
       const SizedBox(height: 7),
     
       // Barra de progreso estática
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar:', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -113,7 +113,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
               padding: const EdgeInsets.all(8),
               child: Text(
                 _progressL.toStringAsFixed(1),
-                style: const TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 20, fontFamily: 'MS_Sans_Serif'),
               ),
             ),
             Padding(
@@ -121,7 +121,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
               child: CDKButton(
                 style: CDKButtonStyle.normal,
                 onPressed: _increaseProgressL,
-                child: const Text('Increase'),
+                child: const Text('Increase', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 18)),
               ),
             ),
           ]
@@ -131,7 +131,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
 
 
       // Barra de progreso indeterminada animada
-      const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar (Indeterminate):')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar (Indeterminate):', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -156,7 +156,10 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
               child: CDKButton(
                 style: CDKButtonStyle.normal,
                 onPressed: _toggleIndeterminateL,
-                child: Text(_isRunningL ? 'Stop' : 'Start'),
+                child: Text(
+                  _isRunningL ? 'Stop' : 'Start',
+                  style: const TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 18),
+                ),
               ),
             ),
           ]
@@ -165,7 +168,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
       const SizedBox(height: 50),
 
       // Círculo de progreso estático
-      const Padding(padding: EdgeInsets.all(8), child: Text('Circular Progress Bar:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('Circular Progress Bar:', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -186,8 +189,10 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(_progressC.toStringAsFixed(1),
-                  style: const TextStyle(fontSize: 12)),
+              child: Text(
+                _progressC.toStringAsFixed(1),
+                style: const TextStyle(fontSize: 20, fontFamily: 'MS_Sans_Serif'),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -201,7 +206,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
                     }
                   });
                 },
-                child: const Text('Increase'),
+                child: const Text('Increase', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 18)),
               ),
             ),
           ]
@@ -210,7 +215,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
       const SizedBox(height: 50),
 
       // Círculo de progreso indeterminado
-      const Padding(padding: EdgeInsets.all(8), child: Text('Indeterminate Circular Progress Bar:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('Indeterminate Circular Progress Bar:', style: TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 23))),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -239,7 +244,10 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
               child: CDKButton(
                 style: CDKButtonStyle.normal,
                 onPressed: _toggleIndeterminateC,
-                child: Text(_isRunningC ? 'Stop' : 'Start'),
+                child: Text(
+                  _isRunningC ? 'Stop' : 'Start',
+                  style: const TextStyle(fontFamily: 'MS_Sans_Serif', fontSize: 18),
+                ),
               ),
             ),
           ]
@@ -258,10 +266,10 @@ class WindowsXPBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint squarePaint = Paint()..color = const Color(0xFF00FF00); // Color verde
+    Paint squarePaint = Paint()..color = const Color(0xFF00FF00); 
 
     double squareWidth = 15; // Tamaño de los cuadrados
-    double gap = 4; // Espacio entre cuadrados
+    double gap = 4; 
     int numSquares = (size.width / (squareWidth + gap)).floor(); // Número de cuadrados que caben
 
     // Calcular cuántos cuadrados mostrar en base al progreso
@@ -294,10 +302,10 @@ class WindowsXPIndeterminateBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint squarePaint = Paint()..color = const Color(0xFF00FF00); // Color verde
+    Paint squarePaint = Paint()..color = const Color(0xFF00FF00); 
 
-    double squareWidth = 15; // Tamaño de los cuadrados
-    double gap = 4; // Espacio entre cuadrados
+    double squareWidth = 13; 
+    double gap = 4; 
     int numSquares = (size.width / (squareWidth + gap)).floor(); // Número de cuadrados que caben
 
     // Calcular cuántos cuadrados mostrar en base al progreso
@@ -361,7 +369,7 @@ class CircularProgressPainter extends CustomPainter {
       double angle = animation.value * 2 * 3.14159; // Girar el círculo
       canvas.drawArc(
         Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: radius),
-        -3.14159 / 2, // Comienza en la parte superior
+        -3.14159 / 2, 
         angle,
         false,
         paintForeground,
@@ -370,7 +378,7 @@ class CircularProgressPainter extends CustomPainter {
       // Si es determinado, dibujamos el progreso calculado
       canvas.drawArc(
         Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: radius),
-        -3.14159 / 2, // Comienza en la parte superior
+        -3.14159 / 2, 
         progressAngle,
         false,
         paintForeground,
