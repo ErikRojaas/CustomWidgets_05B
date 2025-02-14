@@ -10,18 +10,14 @@ class LayoutProgress extends StatefulWidget {
 }
 
 class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStateMixin {
-  // Variables para la barra de progreso estática
   double _progressL = 0.0;
-  // Variables para la barra de progreso indeterminada animada
   bool _isRunningL = false;
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  // Variables para el círculo de progreso estático
   double _progressC = 0.0;
   bool _isRunningC = false;
 
-  // Variables para el círculo de progreso indeterminado
   late AnimationController _circularController;
   late Animation<double> _circularAnimation;
 
@@ -228,7 +224,7 @@ class _LayoutProgressState extends State<LayoutProgress> with TickerProviderStat
                   builder: (context, child) {
                     return CustomPaint(
                       painter: CircularProgressPainter(
-                        progress: 0.0, // Siempre en 0 para ser indeterminado
+                        progress: 0.0, 
                         isIndeterminate: true,
                         animation: _circularAnimation,
                       ),
@@ -265,18 +261,17 @@ class WindowsXPBarPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint squarePaint = Paint()..color = const Color(0xFF00FF00); 
 
-    double squareWidth = 15; // Tamaño de los cuadrados
+    double squareWidth = 15; 
     double gap = 4; 
-    int numSquares = (size.width / (squareWidth + gap)).floor(); // Número de cuadrados que caben
+    int numSquares = (size.width / (squareWidth + gap)).floor(); 
 
-    // Calcular cuántos cuadrados mostrar en base al progreso
+    // Calcular cuántos cuadrados mostrar 
     int visibleSquares = (numSquares * progress).floor();
 
     // Dibujar los cuadrados
     for (int i = 0; i < visibleSquares; i++) {
       double x = i * (squareWidth + gap);
       if (x + squareWidth > 0 && x < size.width) {
-        // Dibujar solo los cuadrados visibles
         canvas.drawRect(
             Rect.fromLTWH(x, size.height / 2 - squareWidth / 2, squareWidth,
                 squareWidth),
@@ -292,7 +287,7 @@ class WindowsXPBarPainter extends CustomPainter {
 }
 
 
-// Pintor para la barra de progreso indeterminada con movimiento de cuadrados de izquierda a derecha
+// Pintor para la barra de progreso indeterminada.
 class WindowsXPIndeterminateBarPainter extends CustomPainter {
   final double progress;
   WindowsXPIndeterminateBarPainter(this.progress);
@@ -303,13 +298,10 @@ class WindowsXPIndeterminateBarPainter extends CustomPainter {
 
     double squareWidth = 13; 
     double gap = 4; 
-    int numSquares = (size.width / (squareWidth + gap)).floor(); // Número de cuadrados que caben
+    int numSquares = (size.width / (squareWidth + gap)).floor(); 
 
-    // Calcular cuántos cuadrados mostrar en base al progreso
     int visibleSquares = (numSquares * progress).floor();
-
-    // Desplazar los cuadrados de izquierda a derecha
-    double offsetX = progress % size.width; // El desplazamiento ahora aumenta hacia la derecha
+    double offsetX = progress % size.width;
 
     // Dibujar los cuadrados moviéndose de izquierda a derecha
     for (int i = 0; i < visibleSquares; i++) {
@@ -348,22 +340,22 @@ class CircularProgressPainter extends CustomPainter {
     Paint paintBackground = Paint()
       ..color = const Color(0xFFDDDDDD)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 6; // Grosor del círculo de fondo
+      ..strokeWidth = 6; 
 
     Paint paintForeground = Paint()
-      ..color = const Color.fromARGB(255, 76, 166, 182) // Color del progreso
+      ..color = const Color.fromARGB(255, 76, 166, 182) 
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 6; // Grosor del progreso
+      ..strokeWidth = 6; 
 
-    double radius = size.width / 3.4; // Radio del círculo
-    double progressAngle = 2 * 3.14159 * progress; // Ángulo de progreso
+    double radius = size.width / 3.4; 
+    double progressAngle = 2 * 3.14159 * progress; 
 
     // Dibujar el círculo de fondo
     canvas.drawCircle(Offset(size.width / 2, size.height / 2), radius, paintBackground);
 
     if (isIndeterminate) {
       // Si es indeterminado, animamos el progreso
-      double angle = animation.value * 2 * 3.14159; // Girar el círculo
+      double angle = animation.value * 2 * 3.14159; 
       canvas.drawArc(
         Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: radius),
         -3.14159 / 2, 
