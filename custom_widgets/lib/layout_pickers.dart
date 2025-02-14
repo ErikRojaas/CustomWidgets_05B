@@ -111,7 +111,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
               Container(
                 width: 40,
                 height: 40,
-                color: _valueSliderColors[0], // Primer color del gradiente
+                color: _valueSliderColors[0], 
               ),
               Text(_valueSliderGradient.toStringAsFixed(2), style: const TextStyle(fontSize: 20, fontFamily: "MS_Sans_Serif")),
             ],
@@ -206,7 +206,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       ),
     );
   }
-
+  // Picker 360 grados.
   Widget _xpStyled360Picker({required double value, required ValueChanged<double> onChanged}) {
     return GestureDetector(
       onPanUpdate: (details) {
@@ -227,7 +227,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       ),
     );
   }
-
+  // Implementacion del slider.
   Widget _xpStyledSlider({required double value, required ValueChanged<double> onChanged}) {
     return CupertinoSlider(
       value: value,
@@ -238,7 +238,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       thumbColor: CupertinoColors.white,
     );
   }
-
+  // Implementacion del gradient.
   Widget _xpStyledGradientPicker({required double value, required ValueChanged<double> onChanged}) {
     return GestureDetector(
       onPanUpdate: (details) {
@@ -262,13 +262,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
-          borderRadius: BorderRadius.zero, // Eliminamos las esquinas redondeadas
+          borderRadius: BorderRadius.zero, 
           border: Border.all(color: CupertinoColors.systemGrey),
         ),
       ),
     );
   }
-
+  // Implementacion barra de botones.
   Widget _xpStyledSegmentedButtons({required int selectedIndex, required List<Widget> options, required ValueChanged<int> onSelected}) {
     return CupertinoSegmentedControl<int>(
       groupValue: selectedIndex,
@@ -304,7 +304,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             decoration: BoxDecoration(
               color: selectedStates[index] ? CupertinoColors.activeBlue.withOpacity(0.3) : CupertinoColors.white,
               border: Border.all(color: CupertinoColors.systemGrey),
-              borderRadius: BorderRadius.zero, // Eliminamos las esquinas redondeadas
+              borderRadius: BorderRadius.zero, 
             ),
             child: options[index],
           ),
