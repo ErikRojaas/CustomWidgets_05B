@@ -17,7 +17,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
     "Option 3",
     "Option 4",
     "Option 5"
-  ]; // Lista de opciones
+  ]; 
 
   bool _isDropdownOpen = false; // Estado del desplegable
   OverlayEntry? _overlayEntry; // Entrada del Overlay para el desplegable
@@ -30,12 +30,12 @@ class _LayoutUtilsState extends State<LayoutUtils> {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return SizedBox(
-      height: 600, // Hice el SizedBox más grande (600 en lugar de 450)
+      height: 600, 
       child: ListView(
         padding: const EdgeInsets.all(8),
         children: [
           const Padding(
-            padding: EdgeInsets.only(left: 8, top: 50, bottom: 8), // Más espacio arriba para bajar el texto
+            padding: EdgeInsets.only(left: 8, top: 50, bottom: 8), 
             child: Text(
               'CDKUtilsDisclosure:',
               style: TextStyle(
